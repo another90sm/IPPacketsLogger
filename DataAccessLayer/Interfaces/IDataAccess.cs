@@ -6,10 +6,11 @@ using System.Text;
 
 namespace DataAccess.Interfaces
 {
-    public interface IDataAccess
+    public interface IDataAccess : IBaseDataAccess
     {
         bool IsDatabaseExist();
         bool CreateDatabase();
         IDataReader GetDBTablesStructure();
+        void CreateTable(string tableName, object[,] columnsParameter);
     }
 }

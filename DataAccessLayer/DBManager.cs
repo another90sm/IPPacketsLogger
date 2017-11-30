@@ -15,26 +15,25 @@ namespace DataAccess
         public static DBManager GetInstance(DataBaseType dbType, string connectionString)
         {
             _instance._connectionString = connectionString;
-            _instance._dataBaseType = dbType;
+            _instance._databaseType = dbType;
             _instance.SetDataAccess();
             return _instance;
         }
 
-        private DataBaseType _dataBaseType;
+        private DataBaseType _databaseType;
         private IDataAccess _dataAccess;
         private string _connectionString;
 
         public IDataAccess DataAccess { get { return this._dataAccess; } }
         private DBManager()
         {
-            this._dataBaseType = DataBaseType.SQLite;
+            this._databaseType = DataBaseType.SQLite;
             this._dataAccess = null;
             this._connectionString = string.Empty;
         }
-
         private void SetDataAccess()
         {
-            switch (this._dataBaseType)
+            switch (this._databaseType)
             {
                 case DataBaseType.SQLite:
                     this._dataAccess = new DataAccessSQLite(this._connectionString);
@@ -50,8 +49,7 @@ namespace DataAccess
                     break;
             }
         }
-
-        public bool CheckIfDataBaseExists()
+        public bool CheckIfDatabaseExists()
         {
             try
             {
@@ -62,13 +60,11 @@ namespace DataAccess
                 throw ex;
             }
         }
-
-        public bool CheckDataBaseStructure()
+        public bool CheckDatabaseStructure()
         {
             return true;
         }
-
-        public bool CreateDataBase()
+        public bool CreateDatabase()
         {
             try
             {
@@ -79,8 +75,34 @@ namespace DataAccess
                 throw ex;
             }
         }
+        private void CreateDatabaseObjects()
+        {
+            try
+            {
+                var description = DBDescription.DeserializeFromXML(this._databaseType);
+                this._dataAccess.BeginTransaction();
+                foreach (var table in description.Tables)
+                {
+                    var tableName = table.Name;
+                    object[,] columnsParameter = new object[table.Columns.Count, 6];
 
-        public void InitializeDataBase()
+                    foreach (var column in table.Columns)
+                    {
+
+                    }
+
+
+                    this._dataAccess.CreateTable(tableName, columnsParameter);
+                }
+                this._dataAccess.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                this._dataAccess.RollbackTransaction();
+                throw ex;
+            }           
+        }       
+        public void InitializeDatabase()
         {
 
         }

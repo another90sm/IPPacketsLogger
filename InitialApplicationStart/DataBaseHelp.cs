@@ -18,17 +18,17 @@ namespace InitialApplicationStart
 
         public bool CheckIfDatabaseExists()
         {
-            return dbManager.CheckIfDataBaseExists();
+            return dbManager.CheckIfDatabaseExists();
         }
 
         public bool CreateDatabase()
         {
-            return dbManager.CreateDataBase();
+            return dbManager.CreateDatabase();
         }
 
         public bool CheckDatabaseStructure()
         {
-            return dbManager.CheckDataBaseStructure();
+            return dbManager.CheckDatabaseStructure();
         }
     }
 }

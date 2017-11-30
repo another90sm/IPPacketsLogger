@@ -1,4 +1,5 @@
 ﻿using DataAccess.DataBaseObjects;
+using DataAccess.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,16 +31,42 @@ namespace DataAccessLayer.DataBaseObjects
         /// <param name="dbDescription"></param>
         public static void SerializeToXML(DBDescription dbDescription)
         {
-            
+
         }
 
-        public static DBDescription DeserializeFromXML()
+        public static DBDescription DeserializeFromXML(DataBaseType dbType)
         {
             Assembly resourceAssembly = Assembly.Load("Resources");
-            string xmlFilePath = resourceAssembly
+            string xmlFilePath = string.Empty;
+
+            switch (dbType)
+            {
+                case DataBaseType.SQLite:
+                    xmlFilePath = resourceAssembly
                 .GetManifestResourceNames()
-                .Where(x => x == "Resources.DBResources.DBObjectsDescriptions.xml")
+                .Where(x => x == "Resources.DBResources.SQLiteDBObjectsDescription.xml")
                 .FirstOrDefault();
+                    break;
+                case DataBaseType.MySQL:
+                    xmlFilePath = resourceAssembly
+                .GetManifestResourceNames()
+                .Where(x => x == "Resources.DBResources.MySQLDBObjectsDescription.xml")
+                .FirstOrDefault();
+                    break;
+                case DataBaseType.MSSQL:
+                    xmlFilePath = resourceAssembly
+                .GetManifestResourceNames()
+                .Where(x => x == "Resources.DBResources.MSSQLDBObjectsDescription.xml")
+                .FirstOrDefault();
+                    break;
+                case DataBaseType.Oracle:
+                    xmlFilePath = resourceAssembly
+                .GetManifestResourceNames()
+                .Where(x => x == "Resources.DBResources.OracleDBObjectsDescription.xml")
+                .FirstOrDefault();
+                    break;
+            }
+
 
             var serializer = new XmlSerializer(typeof(DBDescription));
             Stream stream;

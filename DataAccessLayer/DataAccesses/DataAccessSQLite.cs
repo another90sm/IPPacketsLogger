@@ -49,5 +49,10 @@ namespace DataAccess.DataAccesses
         {
             throw new NotImplementedException();
         }
+
+        public void CreateTable(string tableName, object[,] columnsParameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

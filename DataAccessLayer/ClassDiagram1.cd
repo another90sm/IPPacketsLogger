@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccess.BaseDataAccess" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAABYAAAACQAAAAAAJAAQQAAAAAoACARABBAJCA=</HashCode>
+      <FileName>BaseDataAccess.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccess.DBManager" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAA0AAAAAAABAgAAAEAAAAAEBAAAAAEIAAABAAAAAAA=</HashCode>
+      <FileName>DBManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataAccesses.DataAccessMSSql" Collapsed="true">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABBAAAAAEAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DataAccesses\DataAccessMSSql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccess.DataAccesses.DataAccessMySql" Collapsed="true">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABBAAAAAEAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DataAccesses\DataAccessMySql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccess.DataAccesses.DataAccessOracle" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABBAAAAAEAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DataAccesses\DataAccessOracle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccess.DataAccesses.DataAccessSQLite" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAADBACAAAEAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DataAccesses\DataAccessSQLite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.DataBaseObjects.DBDescription" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>DataBaseObjects\DBDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataBaseObjects.Table" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>DataBaseObjects\Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.DataBaseObjects.TableColumn" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABAAAAAAAAAAAAAAQAABAAAAAAAQAAAAAAEAA=</HashCode>
+      <FileName>DataBaseObjects\TableColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DataAccess.Interfaces.IBaseDataAccess" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAABYAAAACAAAAAAAJAAQQAAAAAAACARABBAICA=</HashCode>
+      <FileName>Interfaces\IBaseDataAcces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DataAccess.Interfaces.IDataAccess" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABBAAAAAEAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Interfaces\IDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DataAccess.DataBaseObjects.ColumnType" Collapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACACAAAAAgAAAAAACAEAAAA=</HashCode>
+      <FileName>DataBaseObjects\TableColumn.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Enums.DataBaseType" Collapsed="true">
+    <Position X="15.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAIAAAAAAAAAAAAAAAAAAAAgAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\DatabaseTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
