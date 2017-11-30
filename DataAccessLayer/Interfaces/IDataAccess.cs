@@ -8,6 +8,7 @@ namespace DataAccess.Interfaces
 {
     public interface IDataAccess
     {
+        bool IsDatabaseExist();
         bool CreateDatabase();
         IDataReader GetDBTablesStructure();
     }

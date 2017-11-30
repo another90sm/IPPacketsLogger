@@ -1,16 +1,10 @@
-﻿using DataAccess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Common;
-using System.Data.SQLite;
-using System.Data;
-using System.Configuration;
-using DataAccess.Enums;
+﻿using DataAccess.Enums;
+using DataAccess.Interfaces;
 using MySql.Data.MySqlClient;
+using System.Data;
 using System.Data.OracleClient;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 namespace DataAccess
 {
     internal abstract class BaseDataAccess : IBaseDataAccess
@@ -19,6 +13,17 @@ namespace DataAccess
         private string _connectionString;
         IDbConnection _connection;
         IDbTransaction _transaction;
+
+        public DataBaseType DBType
+        {
+            get { return this._dbType; }
+            protected set { this._dbType = value; }
+        }
+        public string ConnectionString
+        {
+            get { return this._connectionString; }
+            protected set { this._connectionString = value; }
+        }
         internal BaseDataAccess(DataBaseType dbType, string connectionString)
         {
             this._dbType = dbType;

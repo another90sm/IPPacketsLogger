@@ -22,5 +22,10 @@ namespace DataAccess.DataAccesses
         {
             throw new NotImplementedException();
         }
+
+        public bool IsDatabaseExist()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace DataAccess.Interfaces
 {
     public interface IBaseDataAccess
     {
+        DataBaseType DBType { get; }
+        string ConnectionString { get; }
         void SetConnection(IDbConnection connection);
         IDbConnection GetConnection();
         void OpenConnection();

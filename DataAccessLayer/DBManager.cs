@@ -2,6 +2,7 @@
 using DataAccess.Enums;
 using DataAccess.Interfaces;
 using System;
+using System.Data;
 
 namespace DataAccess
 {
@@ -47,18 +48,17 @@ namespace DataAccess
                     break;
             }
         }
-                
+
         public bool CheckIfDataBaseExists()
         {
             try
             {
-
+                return this._dataAccess.IsDatabaseExist();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                              
+                throw ex;
             }
-            return true;
         }
 
         public bool CheckDataBaseStructure()
@@ -68,7 +68,14 @@ namespace DataAccess
 
         public bool CreateDataBase()
         {
-            return true;
+            try
+            {
+                return this._dataAccess.CreateDatabase();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void InitializeDataBase()

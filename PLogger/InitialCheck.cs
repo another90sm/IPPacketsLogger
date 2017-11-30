@@ -26,18 +26,18 @@ namespace PLogger
 
                     if (!dbHelp.CheckIfDatabaseExists())
                     {
-                        dialogResult = MessageBox.Show(@"Data base is not found in directory set in 'PLogger.exe.config' file!/r/nWould you like to create data base?", "Qestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        dialogResult = MessageBox.Show("Data base is not found in directory set in 'PLogger.exe.config' file!\r\nWould you like to create data base?", "Qestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult == DialogResult.Yes)
                         {
                             if (!dbHelp.CreateDatabase())
                             {
-                                MessageBox.Show(@"Error occurred while creating database!/r/nView Log file for more information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(@"Error occurred while creating database!\r\nView Log file for more information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return false;
                             }
                         }
                         else
                         {
-                            MessageBox.Show(@"If you want to use this application without database, please set attribute 'WorkWithDataBase' value to false in 'PLogger.exe.config' file.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("If you want to use this application without database, please set attribute 'WorkWithDataBase' value to false in 'PLogger.exe.config' file.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return false;
                         }
                     }
