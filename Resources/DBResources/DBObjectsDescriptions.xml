@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Table xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <TableName>TEST</TableName>
-  <TableColumns>
-    <TableColumn>
-      <ColumnName>TestCol</ColumnName>
-      <ColumnType>text</ColumnType>
-      <AllowNull>true</AllowNull>
-      <IsPrimaryKey>false</IsPrimaryKey>
-    </TableColumn>
-  </TableColumns>
-</Table>
+<DBDescription xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Tables>
+    <Table >
+      <Name>TEST</Name>
+      <Columns>
+        <TableColumn>
+          <Name>TestCol</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+      </Columns>
+    </Table>
+    <Table >
+      <Name>TESTTEST</Name>
+      <Columns>
+        <TableColumn>
+          <Name>TestCol2</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TestCol3</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>true</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+      </Columns>
+    </Table>
+  </Tables>
+</DBDescription>
+

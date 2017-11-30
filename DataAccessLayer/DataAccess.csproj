@@ -68,6 +68,7 @@
     <Compile Include="DataAccesses\DataAccessMySql.cs" />
     <Compile Include="DataAccesses\DataAccessOracle.cs" />
     <Compile Include="DataAccesses\DataAccessSQLite.cs" />
+    <Compile Include="DataBaseObjects\DBDescription.cs" />
     <Compile Include="DataBaseObjects\Table.cs" />
     <Compile Include="DataBaseObjects\TableColumn.cs" />
     <Compile Include="DBManager.cs" />

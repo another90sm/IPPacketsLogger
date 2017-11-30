@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace DataAccess.DataBaseObjects
@@ -22,11 +19,12 @@ namespace DataAccess.DataBaseObjects
     [Serializable]
     public class TableColumn
     {
-        public string ColumnName { get; set; }
-        public ColumnType ColumnType { get; set; }
+        public string Name { get; set; }
+        public ColumnType Type { get; set; }
         public bool AllowNull { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsAutoIncrement { get; set; }
+        public int Precision { get; set; }
         public TableColumn()
         {
 

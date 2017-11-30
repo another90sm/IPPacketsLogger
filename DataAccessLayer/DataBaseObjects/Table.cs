@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace DataAccess.DataBaseObjects
 {
     [Serializable]
     [XmlInclude(typeof(TableColumn))]
-    internal class Table
+    public class Table
     {
-        public string TableName { get; set; }
-        public List<TableColumn> TableColumns{ get; set; }
+        public string Name { get; set; }
+        public List<TableColumn> Columns { get; set; }
         public Table()
         {
 
+        }
+        public Table(string tableName, IEnumerable<TableColumn> tableColumns)
+        {
+            this.Name = tableName;
+            this.Columns = tableColumns.ToList();
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="DBDescription">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Tables">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="unbounded" name="Table">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Name" type="xsd:string" />
+                    <xsd:element name="Columns">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element maxOccurs="unbounded" name="TableColumn">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="Name" type="xsd:string" />
+                                <xsd:element name="Type" type="xsd:string" />
+                                <xsd:element name="AllowNull" type="xsd:boolean" />
+                                <xsd:element name="IsPrimaryKey" type="xsd:boolean" />
+                                <xsd:element name="IsAutoIncrement" type="xsd:boolean" />
+								<xsd:element name="Precision" type="xsd:integer" />
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

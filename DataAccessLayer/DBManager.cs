@@ -1,6 +1,8 @@
 ﻿using DataAccess.DataAccesses;
+using DataAccess.DataBaseObjects;
 using DataAccess.Enums;
 using DataAccess.Interfaces;
+using DataAccessLayer.DataBaseObjects;
 using System;
 using System.Data;
 
