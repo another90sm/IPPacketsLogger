@@ -60,9 +60,9 @@ namespace PLogger.UserInterface
                 else
                 {
                     btnStart.Text = "&Start";
-                    cmbInterfaces.Enabled = true;
+                   
                     _continueCapturing = false;
-
+                    cmbInterfaces.Enabled = true;
                     _socket.Close();
                 }
             }
@@ -70,6 +70,7 @@ namespace PLogger.UserInterface
             {
                 MessageBox.Show(ex.Message, "PLogger", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnStart.Text = "&Start";
+                cmbInterfaces.Enabled = true;
                 _continueCapturing = false;
 
                 if (_socket != null)
