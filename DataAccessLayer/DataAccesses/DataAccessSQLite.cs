@@ -9,7 +9,7 @@ namespace DataAccess.DataAccesses
 {
     internal class DataAccessSQLite : BaseDataAccess, IDataAccess
     {
-        private const string _passPhrase = "";//Wh0gIvEsAsH1t
+        private const string _passPhrase = "Wh0gIvEsAsH1t";
         private const string _dbFileName = "sqlite.db";
         private string _filePath;
         internal DataAccessSQLite(string filePath)
@@ -52,7 +52,7 @@ namespace DataAccess.DataAccesses
 
         public void CreateTable(string tableName, object[,] columnsParameter)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

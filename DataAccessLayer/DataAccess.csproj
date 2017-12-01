@@ -72,6 +72,7 @@
     <Compile Include="DataBaseObjects\Table.cs" />
     <Compile Include="DataBaseObjects\TableColumn.cs" />
     <Compile Include="DBManager.cs" />
+    <Compile Include="Enums\ColumnTypeEnum.cs" />
     <Compile Include="Enums\DatabaseTypeEnum.cs" />
     <Compile Include="Interfaces\IDataAccess.cs" />
     <Compile Include="Interfaces\IBaseDataAcces.cs" />

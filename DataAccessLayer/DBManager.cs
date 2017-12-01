@@ -2,9 +2,7 @@
 using DataAccess.DataBaseObjects;
 using DataAccess.Enums;
 using DataAccess.Interfaces;
-using DataAccessLayer.DataBaseObjects;
 using System;
-using System.Data;
 
 namespace DataAccess
 {
@@ -68,7 +66,9 @@ namespace DataAccess
         {
             try
             {
-                return this._dataAccess.CreateDatabase();
+                this._dataAccess.CreateDatabase();
+                this.CreateDatabaseObjects();
+                return true;
             }
             catch (Exception ex)
             {
@@ -81,27 +81,35 @@ namespace DataAccess
             {
                 var description = DBDescription.DeserializeFromXML(this._databaseType);
                 this._dataAccess.BeginTransaction();
-                foreach (var table in description.Tables)
+
+                for (int i = 0; i < description.Tables.Count; i++)
                 {
+                    var table = description.Tables[i];
                     var tableName = table.Name;
                     object[,] columnsParameter = new object[table.Columns.Count, 6];
 
-                    foreach (var column in table.Columns)
+                    for (int j = 0; j < table.Columns.Count; j++)
                     {
-
+                        var column = table.Columns[j];
+                        columnsParameter[j,0] = column.Name;
+                        columnsParameter[j,1] = column.Type;
+                        columnsParameter[j,2] = column.AllowNull;
+                        columnsParameter[j,3] = column.IsPrimaryKey;
+                        columnsParameter[j,4] = column.IsAutoIncrement;
+                        columnsParameter[j,5] = column.Precision;
                     }
-
 
                     this._dataAccess.CreateTable(tableName, columnsParameter);
                 }
+
                 this._dataAccess.CommitTransaction();
             }
             catch (Exception ex)
             {
                 this._dataAccess.RollbackTransaction();
                 throw ex;
-            }           
-        }       
+            }
+        }
         public void InitializeDatabase()
         {
 

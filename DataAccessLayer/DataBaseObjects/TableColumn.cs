@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Xml.Serialization;
+using DataAccess.Enums;
 
 namespace DataAccess.DataBaseObjects
 {
-    public enum ColumnType
-    {
-        [XmlEnum(Name ="text")]
-        Text = 0,
-        [XmlEnum(Name = "integer")]
-        Integer = 1,
-        [XmlEnum(Name = "real")]
-        Real = 2,
-        [XmlEnum(Name = "none")]
-        None = 3,
-        [XmlEnum(Name = "numeric")]
-        Numeric = 4
-    }
     [Serializable]
     public class TableColumn
     {

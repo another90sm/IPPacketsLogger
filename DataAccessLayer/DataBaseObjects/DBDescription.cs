@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace DataAccessLayer.DataBaseObjects
+namespace DataAccess.DataBaseObjects
 {
     [Serializable]
     [XmlRoot]
