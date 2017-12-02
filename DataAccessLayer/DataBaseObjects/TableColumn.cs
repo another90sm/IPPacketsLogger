@@ -11,7 +11,7 @@ namespace DataAccess.DataBaseObjects
         public bool AllowNull { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsAutoIncrement { get; set; }
-        public int Precision { get; set; }
+        public decimal Precision { get; set; }
         public TableColumn()
         {
 

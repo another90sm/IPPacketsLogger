@@ -92,7 +92,7 @@ namespace DataAccess
                     {
                         var column = table.Columns[j];
                         columnsParameter[j,0] = column.Name;
-                        columnsParameter[j,1] = column.Type;
+                        columnsParameter[j,1] = Enum.GetName(typeof(ColumnType),column.Type).ToUpper();
                         columnsParameter[j,2] = column.AllowNull;
                         columnsParameter[j,3] = column.IsPrimaryKey;
                         columnsParameter[j,4] = column.IsAutoIncrement;

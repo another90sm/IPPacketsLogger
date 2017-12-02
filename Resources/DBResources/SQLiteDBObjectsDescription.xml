@@ -2,7 +2,7 @@
 <DBDescription xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Tables>
     <Table >
-      <Name>TEST</Name>
+      <Name>IP_HEADERS</Name>
       <Columns>
         <TableColumn>
           <Name>TestCol</Name>
@@ -12,10 +12,60 @@
           <IsAutoIncrement>false</IsAutoIncrement>
           <Precision>200</Precision>
         </TableColumn>
+        <TableColumn>
+          <Name>TestColReal</Name>
+          <Type>real</Type>
+          <AllowNull>false</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>10.5</Precision>
+        </TableColumn>
       </Columns>
     </Table>
     <Table >
-      <Name>TESTTEST</Name>
+      <Name>TCP_HEADERS</Name>
+      <Columns>
+        <TableColumn>
+          <Name>TestCol2</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TestCol3</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>true</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+      </Columns>
+    </Table>
+    <Table >
+      <Name>UDP_HEADERS</Name>
+      <Columns>
+        <TableColumn>
+          <Name>TestCol2</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TestCol3</Name>
+          <Type>text</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>true</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>200</Precision>
+        </TableColumn>
+      </Columns>
+    </Table>
+    <Table >
+      <Name>DNS_HEADERS</Name>
       <Columns>
         <TableColumn>
           <Name>TestCol2</Name>
