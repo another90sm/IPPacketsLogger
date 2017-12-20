@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using InitialApplicationStart;
 using PacketHeaders;
 
 namespace PLogger.UserInterface
@@ -11,6 +13,7 @@ namespace PLogger.UserInterface
         private Socket _socket;
         private byte[] _byteData = new byte[4096];
         private bool _continueCapturing = false;
+        private bool _pauseCapturing = false;
 
         private delegate void AddTreeNode(TreeNode node);
 
@@ -20,7 +23,7 @@ namespace PLogger.UserInterface
             this.Icon = Properties.Resources.PLogger_Logo;
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Click(object sender, EventArgs e)
         {
             if (cmbInterfaces.Text == "")
             {
@@ -32,64 +35,95 @@ namespace PLogger.UserInterface
             {
                 if (!_continueCapturing)
                 {
-                    btnStart.Text = "&Stop";
-                    cmbInterfaces.Enabled = false;
-
-                    _continueCapturing = true;
-
-                    _socket = new Socket(AddressFamily.InterNetwork,
-     SocketType.Raw, ProtocolType.IP);
-
-                    _socket.Bind(new IPEndPoint(IPAddress.Parse(cmbInterfaces.Text), 0));
-
-                    _socket.SetSocketOption(SocketOptionLevel.IP,
-                            SocketOptionName.HeaderIncluded,
-                            true);
-
-                    byte[] byTrue = new byte[4] { 1, 0, 0, 0 };
-                    byte[] byOut = new byte[4] { 1, 0, 0, 0 };
-
-
-                    _socket.IOControl(IOControlCode.ReceiveAll,
-                                         byTrue,
-                                         byOut);
-
-                    _socket.BeginReceive(_byteData, 0, _byteData.Length, SocketFlags.None,
-     new AsyncCallback(OnReceive), null);
+                    this.SetStartReceiveVariables();
                 }
                 else
                 {
-                    btnStart.Text = "&Start";
-                   
-                    _continueCapturing = false;
-                    cmbInterfaces.Enabled = true;
-                    _socket.Close();
+                    this.SetStopReceiveVariables();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "PLogger", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btnStart.Text = "&Start";
-                cmbInterfaces.Enabled = true;
-                _continueCapturing = false;
-
-                if (_socket != null)
-                    _socket.Close();
+                this.SetStopReceiveVariables();
             }
         }
 
-        private void OnReceive(IAsyncResult ar)
+        private void SetStartReceiveVariables()
+        {
+            btnStart.Text = "Stop";
+            btnPause.Text = "Pause";
+
+            btnPause.Enabled = true;
+            cmbInterfaces.Enabled = false;
+
+            _continueCapturing = true;
+            _pauseCapturing = false;
+
+            _socket = new Socket(AddressFamily.InterNetwork,
+SocketType.Raw, ProtocolType.IP);
+
+            _socket.Bind(new IPEndPoint(IPAddress.Parse(cmbInterfaces.Text), 0));
+
+            _socket.SetSocketOption(SocketOptionLevel.IP,
+                    SocketOptionName.HeaderIncluded,
+                    true);
+
+            byte[] inValue = new byte[4] { 1, 0, 0, 0 };
+            byte[] outValue = new byte[4] { 1, 0, 0, 0 };
+
+
+            _socket.IOControl(IOControlCode.ReceiveAll,
+                                 inValue,
+                                 outValue);
+
+            _socket.BeginReceive(_byteData, 0, _byteData.Length, SocketFlags.None,
+new AsyncCallback(OnReceive), null);
+        }
+            
+        private void SetStopReceiveVariables()
+        {
+            btnStart.Text = "Start";
+            btnPause.Text = "Pause";
+
+            btnPause.Enabled = false;
+            cmbInterfaces.Enabled = true;
+
+            _continueCapturing = false;
+            _pauseCapturing = true;
+
+            if (_socket != null)
+            {
+                _socket.Close();
+                _socket.Dispose();
+            }
+        }
+
+        private void BtnPause_Click(object sender, EventArgs e)
+        {
+            if (!_pauseCapturing)
+            {
+                _pauseCapturing = true;
+                btnPause.Text = "Continue";
+            }
+            else
+            {
+                _pauseCapturing = false;
+                btnPause.Text = "Pause";
+            }
+        }
+
+        private async void OnReceive(IAsyncResult ar)
         {
             try
             {
-                int nReceived = _socket.EndReceive(ar);
+                int received = _socket.EndReceive(ar);
 
-                ParseData(_byteData, nReceived);
+                await Task.Factory.StartNew(() => ParseData(_byteData, received));
 
                 if (_continueCapturing)
                 {
                     _byteData = new byte[4096];
-
                     _socket.BeginReceive(_byteData, 0, _byteData.Length, SocketFlags.None, new AsyncCallback(OnReceive), null);
                 }
             }
@@ -107,6 +141,9 @@ namespace PLogger.UserInterface
             TreeNode rootNode = new TreeNode();
 
             IPHeader ipHeader = new IPHeader(byteData, nReceived);
+            TCPHeader tcpHeader = null;
+            UDPHeader udpHeader = null;
+            DNSHeader dnsHeader = null;
 
             TreeNode ipNode = MakeIPTreeNode(ipHeader);
             rootNode.Nodes.Add(ipNode);
@@ -115,7 +152,7 @@ namespace PLogger.UserInterface
             {
                 case Protocol.TCP:
 
-                    TCPHeader tcpHeader = new TCPHeader(ipHeader.Data, ipHeader.MessageLength);
+                    tcpHeader = new TCPHeader(ipHeader.Data, ipHeader.MessageLength);
 
                     TreeNode tcpNode = MakeTCPTreeNode(tcpHeader);
 
@@ -123,7 +160,9 @@ namespace PLogger.UserInterface
 
                     if (tcpHeader.DestinationPort == "53" || tcpHeader.SourcePort == "53")
                     {
-                        TreeNode dnsNode = MakeDNSTreeNode(tcpHeader.Data, (int)tcpHeader.MessageLength);
+                        dnsHeader = new DNSHeader(udpHeader.Data, Convert.ToInt32(udpHeader.Length) - 8);
+
+                        TreeNode dnsNode = MakeDNSTreeNode(dnsHeader);
                         rootNode.Nodes.Add(dnsNode);
                     }
 
@@ -131,7 +170,7 @@ namespace PLogger.UserInterface
 
                 case Protocol.UDP:
 
-                    UDPHeader udpHeader = new UDPHeader(ipHeader.Data, (int)ipHeader.MessageLength);
+                    udpHeader = new UDPHeader(ipHeader.Data, (int)ipHeader.MessageLength);
 
                     TreeNode udpNode = MakeUDPTreeNode(udpHeader);
 
@@ -139,8 +178,9 @@ namespace PLogger.UserInterface
 
                     if (udpHeader.DestinationPort == "53" || udpHeader.SourcePort == "53")
                     {
+                        dnsHeader = new DNSHeader(udpHeader.Data, Convert.ToInt32(udpHeader.Length) - 8);
 
-                        TreeNode dnsNode = MakeDNSTreeNode(udpHeader.Data, Convert.ToInt32(udpHeader.Length) - 8);
+                        TreeNode dnsNode = MakeDNSTreeNode(dnsHeader);
                         rootNode.Nodes.Add(dnsNode);
                     }
 
@@ -150,12 +190,26 @@ namespace PLogger.UserInterface
                     break;
             }
 
-            AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
+            if (DataBaseInformation.WorkWithDataBase)
+            {
+                if (!IPHeader.SaveData(ipHeader, tcpHeader, udpHeader, dnsHeader))
+                {
+                    this.BeginInvoke(new Action(() => this.SetStopReceiveVariables()));
+                    this.BeginInvoke(new Action(() => MessageBox.Show("Error occurred while saving data to Database!\r\nView error log file for more details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                }
+            }
 
-            rootNode.Text = ipHeader.SourceAddress.ToString() + "-" +
-                ipHeader.DestinationAddress.ToString();
+            if (!_pauseCapturing && this.WindowState != FormWindowState.Minimized)
+            {
+                AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
+                string sourceAddress = ipHeader.SourceAddress.ToString();
+                string destinationAddress = ipHeader.DestinationAddress.ToString();
+                string when = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.ffff");
 
-            treeView.Invoke(addTreeNode, new object[] { rootNode });
+                rootNode.Text = $"{sourceAddress} - {destinationAddress}  at:{when}";
+
+                treeView.Invoke(addTreeNode, new object[] { rootNode });
+            }
         }
 
         private TreeNode MakeIPTreeNode(IPHeader ipHeader)
@@ -227,10 +281,8 @@ namespace PLogger.UserInterface
             return udpNode;
         }
 
-        private TreeNode MakeDNSTreeNode(byte[] byteData, int nLength)
+        private TreeNode MakeDNSTreeNode(DNSHeader dnsHeader)
         {
-            DNSHeader dnsHeader = new DNSHeader(byteData, nLength);
-
             TreeNode dnsNode = new TreeNode();
 
             dnsNode.Text = "DNS";
@@ -246,7 +298,11 @@ namespace PLogger.UserInterface
 
         private void OnAddTreeNode(TreeNode node)
         {
-            treeView.Nodes.Add(node);
+            treeView.Nodes.Insert(0, node);
+            if (treeView.Nodes.Count > 100)
+            {
+                treeView.Nodes.RemoveAt(100);
+            }
         }
 
         private void LoggerForm_Load(object sender, EventArgs e)

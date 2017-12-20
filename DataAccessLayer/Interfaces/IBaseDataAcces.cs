@@ -12,6 +12,7 @@ namespace DataAccess.Interfaces
     {
         DataBaseType DBType { get; }
         string ConnectionString { get; }
+        IDbTransaction Transaction { get; }
         void SetConnection(IDbConnection connection);
         IDbConnection GetConnection();
         void OpenConnection();
@@ -25,6 +26,7 @@ namespace DataAccess.Interfaces
         void ClearTransaction();
         bool HasTransaction { get; }
         IDbCommand GetCommand(string commandText, IDbConnection connection);
+        IDbCommand GetCommandWithTransaction(string commandText, IDbConnection connection, IDbTransaction transaction);
         IDbDataAdapter GetaDataAdapter(IDbCommand command);
     }
 }

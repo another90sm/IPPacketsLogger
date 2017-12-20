@@ -1,6 +1,8 @@
+using DataAccess;
 using System;
 using System.IO;
 using System.Net;
+using System.Data;
 
 namespace PacketHeaders
 {
@@ -12,6 +14,40 @@ namespace PacketHeaders
     };
     public class IPHeader
     {
+
+        public static bool SaveData(IPHeader ipHeader, TCPHeader tcpHeader, UDPHeader udpHeader, DNSHeader dnsHeader)
+        {
+            var dataAccess = DBManager.GetInstance().DataAccess;
+
+            try
+            {
+                var transaction = dataAccess.BeginTransaction();
+
+                var id = ipHeader.Save(transaction);
+
+                if (tcpHeader != null)
+                {
+                    tcpHeader.Save(id, transaction);
+                }
+                if (udpHeader != null)
+                {
+                    udpHeader.Save(id, transaction);
+                }
+                if (dnsHeader != null)
+                {
+                    dnsHeader.Save(id, transaction);
+                }
+
+                dataAccess.CommitTransaction();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                dataAccess.RollbackTransaction();
+                return false;
+            }
+        }
+
         private byte _versionAndHeaderLength;
         private byte _differentiatedServices;
         private ushort _totalLength;
@@ -207,6 +243,11 @@ namespace PacketHeaders
             {
                 return _IPData;
             }
+        }
+
+        public int Save(IDbTransaction transaction)
+        {
+            return DBManager.GetInstance().DataAccess.InsertIPHeader(this._versionAndHeaderLength, this._differentiatedServices, this._totalLength, this._identification, this._flagsAndOffset, this._ttl, this._protocol, this._checksum, this._sourceIPAddress, this._destinationIPAddress, this._headerLength, this._IPData, transaction);
         }
     }
 }

@@ -3,6 +3,7 @@ using DataAccess.DataBaseObjects;
 using DataAccess.Enums;
 using DataAccess.Interfaces;
 using System;
+using Utils.MessageLogging;
 
 namespace DataAccess
 {
@@ -15,6 +16,10 @@ namespace DataAccess
             _instance._connectionString = connectionString;
             _instance._databaseType = dbType;
             _instance.SetDataAccess();
+            return _instance;
+        }
+        public static DBManager GetInstance()
+        {
             return _instance;
         }
 
@@ -107,6 +112,7 @@ namespace DataAccess
             catch (Exception ex)
             {
                 this._dataAccess.RollbackTransaction();
+                MessageLoggManager.LogErr(ex.Message, ex.StackTrace);
                 throw ex;
             }
         }

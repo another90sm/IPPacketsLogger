@@ -1,3 +1,5 @@
+using DataAccess;
+using System.Data;
 using System.IO;
 using System.Net;
 
@@ -71,6 +73,11 @@ namespace PacketHeaders
             {
                 return _totalAdditional.ToString();
             }
+        }
+
+        public void Save(int id, IDbTransaction transaction)
+        {
+            DBManager.GetInstance().DataAccess.InsertDNSHeader(id, this._identification, this._flags, this._totalQuestions, this._totalAnswer, this._totalAuthority, this._totalAdditional, transaction);
         }
     }
 }

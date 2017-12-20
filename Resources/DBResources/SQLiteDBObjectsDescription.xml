@@ -1,24 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DBDescription xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Tables>
-    <Table >
+    <Table>
       <Name>IP_HEADERS</Name>
       <Columns>
         <TableColumn>
-          <Name>TestCol</Name>
+          <Name>ID</Name>
+          <Type>integer</Type>
+          <AllowNull>false</AllowNull>
+          <IsPrimaryKey>true</IsPrimaryKey>
+          <IsAutoIncrement>true</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>VERSION_AND_HEADER_LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>DIFFERENTIATED_SERVICES</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TOTAL_LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>IDENTIFICATION</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>FLAGS_AND_OFFSET</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TTL</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>CHECKSUM</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>PROTOCOL</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>SOURCE_IP_ADDRESS</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>DESTINATION_IP_ADDRESS</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>HEADER_LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>IP_DATA</Name>
+          <Type>blob</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TDT</Name>
           <Type>text</Type>
           <AllowNull>true</AllowNull>
           <IsPrimaryKey>false</IsPrimaryKey>
           <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
-        </TableColumn>
-        <TableColumn>
-          <Name>TestColReal</Name>
-          <Type>real</Type>
-          <AllowNull>false</AllowNull>
-          <IsPrimaryKey>false</IsPrimaryKey>
-          <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>10.5</Precision>
+          <Precision>0</Precision>
         </TableColumn>
       </Columns>
     </Table>
@@ -26,20 +122,108 @@
       <Name>TCP_HEADERS</Name>
       <Columns>
         <TableColumn>
-          <Name>TestCol2</Name>
+          <Name>ID</Name>
+          <Type>integer</Type>
+          <AllowNull>false</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>SOURCE_PORT</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>DESTINATION_PORT</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>SEQUENCE_NUMBER</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>ACKNOWLEDGEMENT_NUMBER</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>DATA_OFFSET_AND_FLAGS</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>WINDOW</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>CHECKSUM</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>URGENT_POINTER</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>HEADER_LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>MESSAGE_LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TCP_DATA</Name>
+          <Type>blob</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TDT</Name>
           <Type>text</Type>
           <AllowNull>true</AllowNull>
           <IsPrimaryKey>false</IsPrimaryKey>
           <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
-        </TableColumn>
-        <TableColumn>
-          <Name>TestCol3</Name>
-          <Type>text</Type>
-          <AllowNull>true</AllowNull>
-          <IsPrimaryKey>true</IsPrimaryKey>
-          <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
+          <Precision>0</Precision>
         </TableColumn>
       </Columns>
     </Table>
@@ -47,20 +231,60 @@
       <Name>UDP_HEADERS</Name>
       <Columns>
         <TableColumn>
-          <Name>TestCol2</Name>
+          <Name>ID</Name>
+          <Type>integer</Type>
+          <AllowNull>false</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>SOURCE_PORT</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>DESTINATION_PORT</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>LENGTH</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>CHECKSUM</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>UDP_DATA</Name>
+          <Type>blob</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TDT</Name>
           <Type>text</Type>
           <AllowNull>true</AllowNull>
           <IsPrimaryKey>false</IsPrimaryKey>
           <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
-        </TableColumn>
-        <TableColumn>
-          <Name>TestCol3</Name>
-          <Type>text</Type>
-          <AllowNull>true</AllowNull>
-          <IsPrimaryKey>true</IsPrimaryKey>
-          <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
+          <Precision>0</Precision>
         </TableColumn>
       </Columns>
     </Table>
@@ -68,20 +292,68 @@
       <Name>DNS_HEADERS</Name>
       <Columns>
         <TableColumn>
-          <Name>TestCol2</Name>
+          <Name>ID</Name>
+          <Type>integer</Type>
+          <AllowNull>false</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>IDENTIFICATION</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>FLAGS</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TOTAL_QUESTIONS</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TOTAL_ANSWER</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TOTAL_AUTHORITY</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TOTAL_ADDITIONAL</Name>
+          <Type>integer</Type>
+          <AllowNull>true</AllowNull>
+          <IsPrimaryKey>false</IsPrimaryKey>
+          <IsAutoIncrement>false</IsAutoIncrement>
+          <Precision>0</Precision>
+        </TableColumn>
+        <TableColumn>
+          <Name>TDT</Name>
           <Type>text</Type>
           <AllowNull>true</AllowNull>
           <IsPrimaryKey>false</IsPrimaryKey>
           <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
-        </TableColumn>
-        <TableColumn>
-          <Name>TestCol3</Name>
-          <Type>text</Type>
-          <AllowNull>true</AllowNull>
-          <IsPrimaryKey>true</IsPrimaryKey>
-          <IsAutoIncrement>false</IsAutoIncrement>
-          <Precision>200</Precision>
+          <Precision>0</Precision>
         </TableColumn>
       </Columns>
     </Table>

@@ -1,4 +1,6 @@
+using DataAccess;
 using System;
+using System.Data;
 using System.IO;
 using System.Net;
 
@@ -67,6 +69,11 @@ namespace PacketHeaders
             {
                 return _UDPData;
             }
+        }
+
+        public void Save(int id, IDbTransaction transaction)
+        {
+            DBManager.GetInstance().DataAccess.InsertUDPHeader(id, this._sourcePort, this._destinationPort, this._length, this._checksum, this._UDPData, transaction);
         }
     }
 }

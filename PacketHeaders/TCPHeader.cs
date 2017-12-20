@@ -2,6 +2,8 @@ using System.Net;
 using System.Text;
 using System;
 using System.IO;
+using DataAccess;
+using System.Data;
 
 namespace PacketHeaders
 {
@@ -181,6 +183,11 @@ namespace PacketHeaders
             {
                 return _messageLength;
             }
+        }
+
+        public void Save(int id, IDbTransaction transaction)
+        {
+            DBManager.GetInstance().DataAccess.InsertTCPHeader(id, this._sourcePort, this._destinationPort, this._sequenceNumber, this._acknowledgementNumber, this._dataOffsetAndFlags, this._window, this._checksum, this._urgentPointer, this._headerLength, this._messageLength, this._TCPData, transaction);
         }
     }
 }

@@ -24,6 +24,11 @@ namespace DataAccess
             get { return this._connectionString; }
             protected set { this._connectionString = value; }
         }
+        public IDbTransaction Transaction
+        {
+            get { return this._transaction; }
+        }
+
         internal BaseDataAccess(DataBaseType dbType, string connectionString)
         {
             this._dbType = dbType;
@@ -31,6 +36,7 @@ namespace DataAccess
             this._connection = null;
             this._transaction = null;
         }
+
         public bool HasConnection
         {
             get
@@ -162,6 +168,23 @@ namespace DataAccess
                     return new SqlCommand(commandText, (SqlConnection)connection);
                 case DataBaseType.Oracle:
                     return new OracleCommand(commandText, (OracleConnection)connection);
+                default:
+                    return null;
+            }
+        }
+
+        public IDbCommand GetCommandWithTransaction(string commandText, IDbConnection connection, IDbTransaction transaction)
+        {
+            switch (this._dbType)
+            {
+                case DataBaseType.SQLite:
+                    return new SQLiteCommand(commandText, (SQLiteConnection)connection, (SQLiteTransaction)transaction);
+                case DataBaseType.MySQL:
+                    return new MySqlCommand(commandText, (MySqlConnection)connection, (MySqlTransaction)transaction);
+                case DataBaseType.MSSQL:
+                    return new SqlCommand(commandText, (SqlConnection)connection, (SqlTransaction)transaction);
+                case DataBaseType.Oracle:
+                    return new OracleCommand(commandText, (OracleConnection)connection, (OracleTransaction)transaction);
                 default:
                     return null;
             }

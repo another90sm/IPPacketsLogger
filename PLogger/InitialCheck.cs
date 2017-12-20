@@ -19,9 +19,10 @@ namespace PLogger
         {
             try
             {
+                DataBaseHelp dbHelp = new DataBaseHelp();
+
                 if (DataBaseInformation.WorkWithDataBase)
-                {
-                    DataBaseHelp dbHelp = new DataBaseHelp();
+                {                    
                     DialogResult dialogResult;
 
                     if (!dbHelp.CheckIfDatabaseExists())

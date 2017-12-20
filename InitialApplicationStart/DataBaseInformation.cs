@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace InitialApplicationStart
 {
-    public class DataBaseInformation
+    public static class DataBaseInformation
     {
         private static bool _workWithDataBase;
         private static string _connectionString;
@@ -35,26 +35,6 @@ namespace InitialApplicationStart
                 throw new ArgumentNullException("One or more attributes was not set to the configuration file!");
             }
 
-            switch (providerName)
-            {
-                case "sqlite":
-                    _dataBaseType = DataBaseType.SQLite;
-                    break;
-                case "mysql":
-                    _dataBaseType = DataBaseType.MySQL;
-                    break;
-                case "mssql":
-                    _dataBaseType = DataBaseType.MSSQL;
-                    break;
-                case "oracle":
-                    _dataBaseType = DataBaseType.Oracle;
-                    break;
-                default:
-                    throw new ArgumentException("Data base type is not valid!");
-            }
-
-            _connectionString = connectionString;
-
             switch (workWithDatabase)
             {
                 case "true":
@@ -64,8 +44,31 @@ namespace InitialApplicationStart
                     _workWithDataBase = false;
                     break;
                 default:
-                    throw new ArgumentException("Data base type is not valid!");
+                    throw new ArgumentException("App setting 'WorkWithDataBase' is not valid!");
             }
+
+            if (_workWithDataBase)
+            {
+                switch (providerName)
+                {
+                    case "sqlite":
+                        _dataBaseType = DataBaseType.SQLite;
+                        break;
+                    case "mysql":
+                        _dataBaseType = DataBaseType.MySQL;
+                        break;
+                    case "mssql":
+                        _dataBaseType = DataBaseType.MSSQL;
+                        break;
+                    case "oracle":
+                        _dataBaseType = DataBaseType.Oracle;
+                        break;
+                    default:
+                        throw new ArgumentException("Data base type is not valid!");
+                }
+
+                _connectionString = connectionString;
+            }                                               
         }
     }
 }
