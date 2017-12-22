@@ -1,6 +1,7 @@
 # IPPacketsLogger
 
 Before start!
+ - Needed .NET framework v 4.5.2 or higher.
  - App is working only with SQLite database until this moment.
  - If you want this app to work without saving data in database set "WorkWithDataBase" to "false" in PLogger.exe.config file.
  - To properly save data in database set directory for database file in PLogger.exe.config file in format {Drive}:\{Folder}, for example "C:\PLogger".
