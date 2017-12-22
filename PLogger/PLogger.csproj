@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BufferedTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="InitialCheck.cs" />
     <Compile Include="UserInterface\PLoggerForm.cs">
       <SubType>Form</SubType>

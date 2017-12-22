@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeView = new System.Windows.Forms.TreeView();
             this.btnStart = new System.Windows.Forms.Button();
             this.cmbInterfaces = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPause = new System.Windows.Forms.Button();
+            this.treeView = new PLogger.Controls.BufferedTreeView();
             this.SuspendLayout();
-            // 
-            // treeView
-            // 
-            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView.Location = new System.Drawing.Point(12, 26);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(459, 486);
-            this.treeView.TabIndex = 0;
             // 
             // btnStart
             // 
@@ -99,17 +89,27 @@
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
+            // treeView
+            // 
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Location = new System.Drawing.Point(12, 26);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(460, 486);
+            this.treeView.TabIndex = 6;
+            // 
             // PLoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 561);
+            this.Controls.Add(this.treeView);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbInterfaces);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.treeView);
             this.MinimumSize = new System.Drawing.Size(400, 600);
             this.Name = "PLoggerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -122,12 +122,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox cmbInterfaces;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPause;
+        private Controls.BufferedTreeView treeView;
     }
 }

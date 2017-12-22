@@ -80,7 +80,7 @@ SocketType.Raw, ProtocolType.IP);
             _socket.BeginReceive(_byteData, 0, _byteData.Length, SocketFlags.None,
 new AsyncCallback(OnReceive), null);
         }
-            
+
         private void SetStopReceiveVariables()
         {
             btnStart.Text = "Start";
