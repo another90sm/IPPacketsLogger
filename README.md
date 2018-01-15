@@ -7,6 +7,10 @@ Before start!
  - To properly save data in database set directory for database file in PLogger.exe.config file in format {Drive}:\{Folder}, for example "C:\PLogger".
  - To properly work app should be "Run as administrator".
 
+PLogger v1.0.0.2
+Summary:
+ - Added filter functionality for source/destination IP addresses 
+ 
 PLogger v1.0.0.1
 Summary:
  - Successfuly saving data in database.

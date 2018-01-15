@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DNSHeader.cs" />
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\FilterEnums.cs" />
+    <Compile Include="Filters\IPFilter.cs" />
     <Compile Include="IPHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCPHeader.cs" />

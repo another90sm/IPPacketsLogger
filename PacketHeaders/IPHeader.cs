@@ -14,7 +14,6 @@ namespace PacketHeaders
     };
     public class IPHeader
     {
-
         public static bool SaveData(IPHeader ipHeader, TCPHeader tcpHeader, UDPHeader udpHeader, DNSHeader dnsHeader)
         {
             var dataAccess = DBManager.GetInstance().DataAccess;

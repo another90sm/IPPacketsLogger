@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InitialApplicationStart;
 using PacketHeaders;
+using PacketHeaders.Filters;
 
 namespace PLogger.UserInterface
 {
@@ -14,13 +15,14 @@ namespace PLogger.UserInterface
         private byte[] _byteData = new byte[4096];
         private bool _continueCapturing = false;
         private bool _pauseCapturing = false;
-
+        private Filter _filter;
         private delegate void AddTreeNode(TreeNode node);
 
         public PLoggerForm()
         {
             InitializeComponent();
             this.Icon = Properties.Resources.PLogger_Logo;
+            this._filter = new Filter();
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
@@ -127,9 +129,6 @@ new AsyncCallback(OnReceive), null);
                     _socket.BeginReceive(_byteData, 0, _byteData.Length, SocketFlags.None, new AsyncCallback(OnReceive), null);
                 }
             }
-            catch (ObjectDisposedException)
-            {
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "PLogger", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -199,7 +198,9 @@ new AsyncCallback(OnReceive), null);
                 }
             }
 
-            if (!_pauseCapturing && this.WindowState != FormWindowState.Minimized)
+            if (!_pauseCapturing && 
+                this.WindowState != FormWindowState.Minimized && 
+                this._filter.FallsIntoFilter(ipHeader, tcpHeader, udpHeader, dnsHeader))
             {
                 AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
                 string sourceAddress = ipHeader.SourceAddress.ToString();
@@ -327,6 +328,26 @@ new AsyncCallback(OnReceive), null);
                 if (_socket != null)
                     _socket.Close();
             }
+        }
+
+        private void Filter_Click(object sender, EventArgs e)
+        {
+            FilterForm filterForm = new FilterForm(this._filter);
+
+            if(filterForm.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void Filter_MouseEnter(object sender, EventArgs e)
+        {
+            this.filterTooltip.Show("Add/Remove Filter", this);
+        }
+
+        private void Filter_MouseLeave(object sender, EventArgs e)
+        {
+            //this.filterTooltip.Hide(this);
         }
     }
 }
