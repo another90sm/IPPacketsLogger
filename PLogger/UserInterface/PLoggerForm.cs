@@ -17,12 +17,61 @@ namespace PLogger.UserInterface
         private bool _pauseCapturing = false;
         private Filter _filter;
         private delegate void AddTreeNode(TreeNode node);
+        private ContextMenu _contextMenu;
 
         public PLoggerForm()
         {
             InitializeComponent();
             this.Icon = Properties.Resources.PLogger_Logo;
             this._filter = new Filter();
+            this.InitContextMenu();
+        }
+
+        private void InitContextMenu()
+        {
+            MenuItem[] menuItems = new MenuItem[]
+            {
+                new MenuItem("Copy Source IP address", new EventHandler(CopyIp)),
+                new MenuItem("Copy Destination IP address", new EventHandler(CopyIp))
+            };
+
+            this._contextMenu = new ContextMenu();
+            this._contextMenu.MenuItems.AddRange(menuItems);
+        }
+
+        private void CopyIp(object sender, EventArgs e)
+        {
+            if (sender != null)
+            {
+                var selectedNodeText = treeView.SelectedNode.Text;
+                var ips = selectedNodeText.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                var sourceIp = ips[0].Trim();
+                var destinationIp = ips[1].Trim();
+
+                var menuItem = (MenuItem)sender;
+
+                if (menuItem == menuItem.Parent.MenuItems[0])
+                {
+                    Clipboard.SetDataObject(sourceIp);
+                }
+                else
+                {
+                    Clipboard.SetDataObject(destinationIp);
+                }
+            }
+        }
+
+        private void TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (sender != null)
+            {
+                treeView.SelectedNode = e.Node;
+
+                if (e.Button == MouseButtons.Right && (treeView.SelectedNode.Nodes.Count <= 3 && treeView.SelectedNode.Nodes.Count > 0))
+                {
+                    _contextMenu.Show(treeView, e.Location);
+                }
+            }
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
@@ -94,11 +143,11 @@ new AsyncCallback(OnReceive), null);
             _continueCapturing = false;
             _pauseCapturing = true;
 
-            if (_socket != null)
-            {
-                _socket.Close();
-                _socket.Dispose();
-            }
+            //if (_socket != null)
+            //{
+            //    _socket.Close();
+            //    _socket.Dispose();
+            //}
         }
 
         private void BtnPause_Click(object sender, EventArgs e)
@@ -112,6 +161,14 @@ new AsyncCallback(OnReceive), null);
             {
                 _pauseCapturing = false;
                 btnPause.Text = "Pause";
+            }
+        }
+
+        private void BtnClear_Click(object sender, EventArgs e)
+        {
+            lock (treeView)
+            {
+                treeView.Nodes.Clear();
             }
         }
 
@@ -198,8 +255,8 @@ new AsyncCallback(OnReceive), null);
                 }
             }
 
-            if (!_pauseCapturing && 
-                this.WindowState != FormWindowState.Minimized && 
+            if (!_pauseCapturing &&
+                this.WindowState != FormWindowState.Minimized &&
                 this._filter.FallsIntoFilter(ipHeader, tcpHeader, udpHeader, dnsHeader))
             {
                 AddTreeNode addTreeNode = new AddTreeNode(OnAddTreeNode);
@@ -207,7 +264,7 @@ new AsyncCallback(OnReceive), null);
                 string destinationAddress = ipHeader.DestinationAddress.ToString();
                 string when = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.ffff");
 
-                rootNode.Text = $"{sourceAddress} - {destinationAddress}  at:{when}";
+                rootNode.Text = $"{sourceAddress} - {destinationAddress}";
 
                 treeView.Invoke(addTreeNode, new object[] { rootNode });
             }
@@ -334,7 +391,7 @@ new AsyncCallback(OnReceive), null);
         {
             FilterForm filterForm = new FilterForm(this._filter);
 
-            if(filterForm.ShowDialog() == DialogResult.OK)
+            if (filterForm.ShowDialog() == DialogResult.OK)
             {
 
             }

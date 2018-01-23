@@ -35,16 +35,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPause = new System.Windows.Forms.Button();
-            this.treeView = new PLogger.Controls.BufferedTreeView();
             this.filter = new System.Windows.Forms.PictureBox();
             this.filterTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClear = new System.Windows.Forms.Button();
+            this.treeView = new PLogger.Controls.BufferedTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.filter)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStart.Location = new System.Drawing.Point(12, 524);
+            this.btnStart.Location = new System.Drawing.Point(12, 515);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(61, 40);
             this.btnStart.TabIndex = 1;
@@ -58,16 +59,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterfaces.FormattingEnabled = true;
-            this.cmbInterfaces.Location = new System.Drawing.Point(144, 543);
+            this.cmbInterfaces.Location = new System.Drawing.Point(209, 534);
             this.cmbInterfaces.Name = "cmbInterfaces";
-            this.cmbInterfaces.Size = new System.Drawing.Size(327, 21);
+            this.cmbInterfaces.Size = new System.Drawing.Size(312, 21);
             this.cmbInterfaces.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(417, 527);
+            this.label1.Location = new System.Drawing.Point(467, 518);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 3;
@@ -78,15 +79,15 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 13);
+            this.label2.Size = new System.Drawing.Size(132, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Source IP - Destination IP  at: (Date and time)";
+            this.label2.Text = "Source IP - Destination IP ";
             // 
             // btnPause
             // 
             this.btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPause.Enabled = false;
-            this.btnPause.Location = new System.Drawing.Point(79, 524);
+            this.btnPause.Location = new System.Drawing.Point(79, 515);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(59, 40);
             this.btnPause.TabIndex = 5;
@@ -94,21 +95,12 @@
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
-            // treeView
-            // 
-            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView.Location = new System.Drawing.Point(12, 26);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(460, 495);
-            this.treeView.TabIndex = 6;
-            // 
             // filter
             // 
+            this.filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.filter.Image = ((System.Drawing.Image)(resources.GetObject("filter.Image")));
-            this.filter.Location = new System.Drawing.Point(144, 524);
+            this.filter.Location = new System.Drawing.Point(209, 515);
             this.filter.Name = "filter";
             this.filter.Size = new System.Drawing.Size(16, 16);
             this.filter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -118,11 +110,34 @@
             this.filter.MouseEnter += new System.EventHandler(this.Filter_MouseEnter);
             this.filter.MouseLeave += new System.EventHandler(this.Filter_MouseLeave);
             // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClear.Location = new System.Drawing.Point(144, 515);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(59, 40);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
+            // treeView
+            // 
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Location = new System.Drawing.Point(12, 26);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(510, 486);
+            this.treeView.TabIndex = 6;
+            this.treeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView_NodeMouseClick);
+            // 
             // PLoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 570);
+            this.ClientSize = new System.Drawing.Size(534, 561);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.filter);
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.btnPause);
@@ -151,5 +166,6 @@
         private Controls.BufferedTreeView treeView;
         private System.Windows.Forms.PictureBox filter;
         private System.Windows.Forms.ToolTip filterTooltip;
+        private System.Windows.Forms.Button btnClear;
     }
 }
