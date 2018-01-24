@@ -12,7 +12,7 @@ Summary:
  - Added filter functionality for source/destination IP addresses.
  - Added button to clear treeview content.
  - Added functionality for copying source/destination IP addresses into clipboard.
- - Minor bug 
+ - Minor bug fixing.
  
 PLogger v1.0.0.1
 Summary:
